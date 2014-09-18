@@ -15,7 +15,7 @@ public class Assign_Temporary_Zeros extends ConnexusMain {
 		GradeElements page = new GradeElements(getDriver());
 		page.login();
 		page.clickSectionDropDown();
-		page.enterGradesForWholeClassFirst(gradeIconIndex);
+		//page.enterGradesForWholeClassFirst(gradeIconIndex);
 
 	}
 }

@@ -12,13 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CommonElements extends PageObject {
+
     public CommonElements(WebDriver driver) 
     {
         super(driver);        
     }   
     
-    public class classInfo
-    {
+    public class classInfo {
         public String className;
         public String classURL;
         public String classSchool;
@@ -31,40 +31,38 @@ public class CommonElements extends PageObject {
     /**
      * Identify elements on the page.
      */
-    public WebElement getUsernameTextbox()
-    {
+
+    public WebElement getUsernameTextbox() {
         try {
-            return source.findElement(By.id("loginPortallet_loginFormEmail"));
+            return source.findElement(By.id("loginFormEmail"));
         }
-        catch (NoSuchElementException ex)
-        {
+        catch (NoSuchElementException ex) {
             return null;
         }   
     }
-    public WebElement getPassTextbox()
-    {
-        return source.findElement(By.id("loginPortallet_old"));
+
+    public WebElement getPassTextbox() {
+        return source.findElement(By.id("loginFormPassword"));
     }
-    public WebElement getLoginButton()
-    {
+
+    public WebElement getLoginButton() {
         return source.findElement(By.id("loginPortallet_loginFormButton"));
     }
-    public WebElement getSectionDropDown()
-    {
+
+    public WebElement getSectionDropDown() {
         try {
             return source.findElement(By.id("mySections_ctl00_portalletHeaderLeft"));
         }
-        catch (NoSuchElementException ex)
-        {
+        catch (NoSuchElementException ex) {
             return null;
         }   
     }
-    public WebElement getSectionLoadingSpinner()
-    {
+
+    public WebElement getSectionLoadingSpinner() {
         return source.findElement(By.id("mySections_ctl00_loadingPanel"));
     }
-    public static char[] getPass() 
-    {
+
+    public static char[] getPass() {
         JLabel jl = new JLabel("Enter Your Password: ");
         JPasswordField jpf = new JPasswordField(24);
         Box box = Box.createHorizontalBox();
@@ -77,19 +75,18 @@ public class CommonElements extends PageObject {
         }
         return null;
     }
-    public WebElement getSectionTable() 
-    {
+
+    public WebElement getSectionTable() {
         WebElement tableContainer = source.findElement(By.id("mySections"));
         return tableContainer.findElement(By.cssSelector("table.datagridCondensed"));
     }
-    public List <WebElement> getSectionTableRows()
-    {
+
+    public List <WebElement> getSectionTableRows() {
         return getSectionTable().findElements(By.cssSelector("tr.portalletEnhancedpurpleCell"));
     }
-    public void getClassList(int index)
-    {
-        for(WebElement sectionCell : getSectionTableRows())
-            {
+
+    public void getClassList(int index) {
+        for(WebElement sectionCell : getSectionTableRows()) {
                 List<WebElement> columnsInRow = sectionCell.findElements(By.cssSelector("td"));
                 String className = columnsInRow.get(1).getText();   //1 = name column index
                 String classSchool = columnsInRow.get(2).getText();  //2 = school column index
@@ -107,56 +104,47 @@ public class CommonElements extends PageObject {
      * Actions on elements on the page.
      * @throws InterruptedException 
      */
-    public void waitForElementToShow(WebElement element)
-    { 
-        
-    }
-    public void goToRootURL() throws InterruptedException 
-    {  
+
+    public void waitForElementToShow(WebElement element)   {  }
+
+    public void goToRootURL() throws InterruptedException {
         //goes to homepage, waits for username textbox to load
         source.get(ConnexusMain.getProperty("ROOT"));
         waitForElementToShow(getUsernameTextbox());
     }
-    public void clickLogin()
-    {
+
+    public void clickLogin() {
         getLoginButton().click();
     }
 
-    public void login() throws InterruptedException  //use this function to ask for user login info
-    {
+    public void login() throws InterruptedException  {  //use this function to ask for user login info
         String usernameInput = JOptionPane.showInputDialog ( "Enter username:" ); 
         getUsernameTextbox().sendKeys(usernameInput);
         getPassTextbox().sendKeys(new String(getPass()));
         clickLogin();
         waitForElementToShow(getSectionDropDown());
     }
-    public boolean ElementIsDisplayed(WebElement element)
-    {
-        if(element.isDisplayed())
-                return true;
-            return false;
+
+    public boolean ElementIsDisplayed(WebElement element) {
+        return element.isDisplayed();
     }
-    public void clickSectionDropDown() throws InterruptedException
-    {
+
+    public void clickSectionDropDown() throws InterruptedException {
         getSectionDropDown().click();
         //the function below looks for the loading spinner, if it is still present it waits 1 second and tries again.  will try for 30 seconds.
-        for(int i=0; i<30; i++)
-        {
-            if(ElementIsDisplayed(getSectionLoadingSpinner()))
-            {
+        for(int i=0; i<30; i++) {
+            if(ElementIsDisplayed(getSectionLoadingSpinner())) {
                 Thread.sleep(1000);
             }
-            else
-            {
+            else {
                 break;
             }
         }
     }
-    public List<Integer> displaySectionOptions()
-    {
+
+    public List<Integer> displaySectionOptions() {
         List <String> displayOptions = new ArrayList<String>();
-        for(int i = 0; i<classList.size(); i++)
-        {
+        for(int i = 0; i<classList.size(); i++) {
             displayOptions.add(classList.get(i).className + " : " + classList.get(i).classSchool);
         }
         JFrame j=new JFrame();

@@ -23,33 +23,27 @@ public class GradeElements extends CommonElements {
 	 * Identify elements on the page.
 	 */
 
-	public WebElement gradesTable()
-	{
-		return source.findElement(By.id("grid"));
+	public WebElement gradesTable() {
+        return source.findElement(By.id("grid"));
 	}
-	public List <WebElement> gradesTableRows()
-	{
-		return gradesTable().findElements(By.cssSelector("tr"));
+
+	public List <WebElement> gradesTableRows() {
+        return gradesTable().findElements(By.cssSelector("tr"));
 	}
-	public List <String> getPopUpURLList(double percentClassComplete)
-	{
+
+	public List <String> getPopUpURLList(double percentClassComplete) {
 		List <WebElement> tableColumns;
 		List <String> gradeURLList = new ArrayList<String>();
 		int rowNumber = 0;
-		for(WebElement saveRows : gradesTableRows())
-		{
-			if(!saveRows.getAttribute("class").equals("dataGridCondensed dataGridPager") && !saveRows.getAttribute("class").equals("th") && !saveRows.getAttribute("class").equals("averages") && rowNumber > 3)
-			{	
+		for(WebElement saveRows : gradesTableRows()) {
+			if(!saveRows.getAttribute("class").equals("dataGridCondensed dataGridPager") && !saveRows.getAttribute("class").equals("th") && !saveRows.getAttribute("class").equals("averages") && rowNumber > 3) {
 				tableColumns = saveRows.findElements(By.cssSelector("td"));
 				int columnNumber = 0;
 				int numPerRow = 0;
 				int maxNumLessons = tableColumns.size() - 3;
-				for(WebElement tableCell : tableColumns)
-				{
-					if(columnNumber > 2)
-					{
-						if(tableCell.getText().equals("G") && columnNumber <= (maxNumLessons*percentClassComplete) + 2)
-							{
+				for(WebElement tableCell : tableColumns) {
+					if(columnNumber > 2) {
+						if(tableCell.getText().equals("G") && columnNumber <= (maxNumLessons*percentClassComplete) + 2) {
 								WebElement popupClick = tableCell.findElement(By.cssSelector("a"));
 								gradeURLList.add(popupClick.getAttribute("href"));
 								numPerRow++;
@@ -63,25 +57,24 @@ public class GradeElements extends CommonElements {
 		}
 		return gradeURLList;
 	}
-	public WebElement getTempZeroRadioButton()
-	{
+
+	public WebElement getTempZeroRadioButton() {
 		return source.findElement(By.id("temporaryZero"));
 	}
-	public WebElement getTempZeroSaveButton() 
-	{
-		return source.findElement(By.id("saveButton"));
+
+	public WebElement getTempZeroSaveButton() {
+        return source.findElement(By.id("saveButton"));
 	}
-	public WebElement getGridTab()
-	{
-		return source.findElement(By.id("tabStrip_gridTab"));
+
+	public WebElement getGridTab() {
+        return source.findElement(By.id("tabStrip_gridTab"));
 	}
-	public WebElement getSaveButtonOnGridTab()
-	{
+
+	public WebElement getSaveButtonOnGridTab() {
 		try {
 			return source.findElement(By.id("generateExport_image"));
 		}
-		catch (NoSuchElementException ex)
-		{
+		catch (NoSuchElementException ex) {
 			return null;
 		}	
 	}
@@ -91,18 +84,16 @@ public class GradeElements extends CommonElements {
 	 * Actions on elements on the page.
 	 * @throws InterruptedException 
 	 */
-	public void clickTempZeroRadioButton()
-	{
-		getTempZeroRadioButton().click();
+	public void clickTempZeroRadioButton() {
+        getTempZeroRadioButton().click();
 	}
-	public void clickTempZeroSaveButton()
-	{
-		getTempZeroSaveButton().click();
+
+	public void clickTempZeroSaveButton() {
+        getTempZeroSaveButton().click();
 	}
-	public void enterTempZeroGrades(double percentClassComplete) throws InterruptedException
-	{
-		for(String popupURL : getPopUpURLList(percentClassComplete))
-		{
+
+	public void enterTempZeroGrades(double percentClassComplete) throws InterruptedException {
+		for(String popupURL : getPopUpURLList(percentClassComplete)) {
 			source.get(popupURL);
 			waitForElementToShow(getTempZeroRadioButton());
 			clickTempZeroRadioButton();
@@ -111,16 +102,14 @@ public class GradeElements extends CommonElements {
 		}
 	}
 
-	public void goToClassGridURL(String url)
-	{
+	public void goToClassGridURL(String url) {
 		String sectionID = url.substring(url.lastIndexOf('=') + 1);
 		String gridURL = "https://www.connexus.com/gradebook/section/grid.aspx?idSection="+sectionID+"&activeness=active";
 		source.get(gridURL);
 		waitForElementToShow(getSaveButtonOnGridTab());
 	}
 
-    public class studentClassInfo
-    {
+    public class studentClassInfo  {
         public String studentName;
         public double studentPercent;
         public int studentRow;
@@ -174,11 +163,9 @@ public class GradeElements extends CommonElements {
 
     }
 
-    public List<Integer> displayStudentOptions()
-    {
+    public List<Integer> displayStudentOptions() {
         List <String> displayStudents = new ArrayList<String>();
-        for(int i = 0; i<studentList.size(); i++)
-        {
+        for(int i = 0; i<studentList.size(); i++) {
             displayStudents.add(studentList.get(i).studentName);
         }
         JFrame j=new JFrame();
@@ -196,23 +183,19 @@ public class GradeElements extends CommonElements {
 
     public void setStudentPercents() {
         for(int index : displayStudentOptions()) {
-
             String percentStudentCompleteString = JOptionPane.showInputDialog ( "Enter percent to complete for " + studentList.get(index).studentName + " in " + classList.get(index).className + " : " + classList.get(index).classSchool);
             double percentStudentComplete = Double.parseDouble(percentStudentCompleteString);
             percentStudentComplete = (percentStudentComplete/100);
             System.out.println(percentStudentComplete);
             studentList.get(index).studentPercent = percentStudentComplete;
-
         }
     }
 
     public void enterGradesForWholeClassFirst(int index) throws InterruptedException {
-
         getClassList(index);
         setClassPercentsWithStudentOption();
 
         for(int i = 0; i<classList.size(); i++) {
-
             if(classList.get(i).classPercent > 0 && classList.get(i).enterStudentGrades == false) {
                 goToClassGridURL(classList.get(i).classURL);
 					enterTempZeroGrades(classList.get(i).classPercent);
@@ -221,7 +204,6 @@ public class GradeElements extends CommonElements {
 
         for(int i = 0; i<classList.size(); i++) {
             if(classList.get(i).enterStudentGrades == true) {
-
                 goToClassGridURL(classList.get(i).classURL);
                 getStudents();
                 setStudentPercents();
@@ -237,8 +219,7 @@ public class GradeElements extends CommonElements {
         }
     }
 
-    public List <String> getPopUpURLListForStudents(double percentStudentComplete, int studentRow)
-    {
+    public List <String> getPopUpURLListForStudents(double percentStudentComplete, int studentRow) {
         List <WebElement> tableColumns;
         List <String> gradeURLList = new ArrayList<String>();
 
@@ -249,12 +230,9 @@ public class GradeElements extends CommonElements {
         int columnNumber = 0;
         int numPerRow = 0;
         int maxNumLessons = tableColumns.size() - 3;
-        for(WebElement tableCell : tableColumns)
-        {
-            if(columnNumber > 2)
-            {
-                if(tableCell.getText().equals("G") && columnNumber <= (maxNumLessons*percentStudentComplete) + 2)
-                {
+        for(WebElement tableCell : tableColumns) {
+            if(columnNumber > 2) {
+                if(tableCell.getText().equals("G") && columnNumber <= (maxNumLessons*percentStudentComplete) + 2) {
                     WebElement popupClick = tableCell.findElement(By.cssSelector("a"));
                     gradeURLList.add(popupClick.getAttribute("href"));
                     numPerRow++;
@@ -268,10 +246,8 @@ public class GradeElements extends CommonElements {
         return gradeURLList;
     }
 
-    public void enterTempZeroGradesForStudents(double percentStudentComplete, int studentRow) throws InterruptedException
-    {
-        for(String popupURL : getPopUpURLListForStudents(percentStudentComplete, studentRow))
-        {
+    public void enterTempZeroGradesForStudents(double percentStudentComplete, int studentRow) throws InterruptedException {
+        for(String popupURL : getPopUpURLListForStudents(percentStudentComplete, studentRow)) {
             source.get(popupURL);
             waitForElementToShow(getTempZeroRadioButton());
             clickTempZeroRadioButton();
