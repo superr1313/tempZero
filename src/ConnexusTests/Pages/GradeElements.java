@@ -223,7 +223,6 @@ public class GradeElements extends CommonElements {
         List <WebElement> tableColumns;
         List <String> gradeURLList = new ArrayList<String>();
 
-
         WebElement studentRowIndex = getStudentRows().get(studentRow);
 
         tableColumns = studentRowIndex.findElements(By.cssSelector("td"));
