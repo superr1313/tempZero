@@ -46,7 +46,7 @@ public class CommonElements extends PageObject {
     }
 
     public WebElement getLoginButton() {
-        return source.findElement(By.id("loginPortallet_loginFormButton"));
+        return source.findElement(By.id("loginFormButton"));
     }
 
     public WebElement getSectionDropDown() {
