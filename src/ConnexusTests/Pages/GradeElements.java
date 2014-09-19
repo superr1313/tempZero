@@ -2,10 +2,8 @@ package ConnexusTests.Pages;
 
 import ConnexusTests.CommonElements;
 import org.apache.commons.lang3.ArrayUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -254,11 +252,15 @@ public class GradeElements extends CommonElements {
     }
 
     public void setupEmailField() {
+        System.out.println("blah blah blah");
         studentRowInfo newTest = new studentRowInfo();
         newTest.emailStudent = 0;
+        emailField.add(newTest);
     }
 
     public void enterTempZeroGradesForStudents(double percentStudentComplete, int studentRow) throws InterruptedException {
+        String classURL = source.getCurrentUrl();
+
         for(String popupURL : getPopUpURLListForStudents(percentStudentComplete, studentRow)) {
             source.get(popupURL);
             waitForElementToShow(getTempZeroRadioButton());
@@ -267,10 +269,21 @@ public class GradeElements extends CommonElements {
             waitForElementToShow(getTempZeroSaveButton());
         }
 
+        source.get(classURL);
+
         System.out.println("did we get to here??");
         System.out.println("this is the value of emailStudent: " + emailField.get(0).emailStudent);
         if(emailField.get(0).emailStudent == 1) {
             System.out.println("this student would have the email thing done:" + studentRow);
+
+            WebElement tableColumn;
+            WebElement studentRowIndex = getStudentRows().get(studentRow);
+            tableColumn = studentRowIndex.findElements(By.cssSelector("td")).get(2);
+            WebElement mailIcon = tableColumn.findElement(By.cssSelector("a"));
+
+            Actions shiftClick = new Actions(source);
+            shiftClick.keyDown(Keys.SHIFT).click(mailIcon).keyUp(Keys.SHIFT).perform();
+
         }
 
         emailField.get(0).emailStudent = 0;

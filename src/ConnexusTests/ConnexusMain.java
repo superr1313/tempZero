@@ -30,16 +30,15 @@ protected static WebDriver getNewDriver()
 @Before
 public void Before() throws InterruptedException, IOException {
     if(null==System.getProperty("webdriver.chrome.driver")) {
-        System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver");
     }        
 	driver = getNewDriver();
 	startPage();
 }
     
 @After
-public void After() 
-{
-	driver.quit(); 
+public void After() {
+	//driver.quit();
 }
 
 public void startPage() throws InterruptedException, IOException 
