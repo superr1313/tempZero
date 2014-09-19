@@ -238,6 +238,7 @@ public class GradeElements extends CommonElements {
                     gradeURLList.add(popupClick.getAttribute("href"));
                     numPerRow++;
                     System.out.println("the url found was: " + popupClick.getAttribute("href"));
+                    emailStudent = 1;
                 }
             }
             columnNumber++;
