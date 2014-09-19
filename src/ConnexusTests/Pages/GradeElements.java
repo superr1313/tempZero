@@ -253,8 +253,12 @@ public class GradeElements extends CommonElements {
         return gradeURLList;
     }
 
+    public void setupEmailField() {
+        studentRowInfo newTest = new studentRowInfo();
+        newTest.emailStudent = 0;
+    }
+
     public void enterTempZeroGradesForStudents(double percentStudentComplete, int studentRow) throws InterruptedException {
-        emailField.get(0).emailStudent = 0;
         for(String popupURL : getPopUpURLListForStudents(percentStudentComplete, studentRow)) {
             source.get(popupURL);
             waitForElementToShow(getTempZeroRadioButton());
@@ -263,10 +267,13 @@ public class GradeElements extends CommonElements {
             waitForElementToShow(getTempZeroSaveButton());
         }
 
+        System.out.println("did we get to here??");
+        System.out.println("this is the value of emailStudent: " + emailField.get(0).emailStudent);
         if(emailField.get(0).emailStudent == 1) {
             System.out.println("this student would have the email thing done:" + studentRow);
         }
 
+        emailField.get(0).emailStudent = 0;
     }
 
 
