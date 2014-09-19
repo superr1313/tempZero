@@ -99,13 +99,31 @@ public class GradeElements extends CommonElements {
 	}
 
 	public void enterTempZeroGrades(double percentClassComplete) throws InterruptedException {
-		for(String popupURL : getPopUpURLList(percentClassComplete)) {
+        String classURL = source.getCurrentUrl();
+
+        for(String popupURL : getPopUpURLList(percentClassComplete)) {
 			source.get(popupURL);
 			waitForElementToShow(getTempZeroRadioButton());
 			clickTempZeroRadioButton();
 			clickTempZeroSaveButton();
 			waitForElementToShow(getTempZeroSaveButton());
 		}
+
+        //go back to class url and get the current window handle
+        source.get(classURL);
+        String winHandleBefore = source.getWindowHandle();
+
+        List <WebElement> emailIcons = null;
+
+        for(WebElement studentRow : getStudentRows()) {
+            emailIcons.add(studentRow.findElements(By.cssSelector("td")).get(2).findElement(By.cssSelector("a")));
+        }
+
+        for(WebElement emailIcon : emailIcons) {
+            Actions shiftClick = new Actions(source);
+            shiftClick.keyDown(Keys.SHIFT).click(emailIcon).keyUp(Keys.SHIFT).perform();
+            source.switchTo().window(winHandleBefore);
+        }
 	}
 
 	public void goToClassGridURL(String url) {
@@ -270,15 +288,12 @@ public class GradeElements extends CommonElements {
             waitForElementToShow(getTempZeroSaveButton());
         }
 
+        //go back to class url and get the current window handle
         source.get(classURL);
-
         String winHandleBefore = source.getWindowHandle();
 
-        System.out.println("did we get to here??");
-        System.out.println("this is the value of emailStudent: " + emailField.get(0).emailStudent);
+        //if the student had a temp zero enter, shift click the email icon to open the email window
         if(emailField.get(0).emailStudent == 1) {
-            System.out.println("this student would have the email thing done:" + studentRow);
-
             WebElement tableColumn;
             WebElement studentRowIndex = getStudentRows().get(studentRow);
             tableColumn = studentRowIndex.findElements(By.cssSelector("td")).get(2);
@@ -286,14 +301,15 @@ public class GradeElements extends CommonElements {
 
             Actions shiftClick = new Actions(source);
             shiftClick.keyDown(Keys.SHIFT).click(mailIcon).keyUp(Keys.SHIFT).perform();
-
         }
 
+        //go back to the original window and set the emailStudent (boolean) back to 0
         source.switchTo().window(winHandleBefore);
         emailField.get(0).emailStudent = 0;
     }
 
     public void printWindowHandles() {
+        //try printing out all handles.  if all email windows have the same handle we may be able to iterate through all of them and click the recipient and click next, etc
         Set <String> windowHandles = source.getWindowHandles();
         System.out.println("There are " + windowHandles.size() + " window handles open.");
         for(String windowHandle : windowHandles) {
