@@ -271,6 +271,8 @@ public class GradeElements extends CommonElements {
 
         source.get(classURL);
 
+        String winHandleBefore = source.getWindowHandle();
+
         System.out.println("did we get to here??");
         System.out.println("this is the value of emailStudent: " + emailField.get(0).emailStudent);
         if(emailField.get(0).emailStudent == 1) {
@@ -286,6 +288,7 @@ public class GradeElements extends CommonElements {
 
         }
 
+        source.switchTo().window(winHandleBefore);
         emailField.get(0).emailStudent = 0;
     }
 
