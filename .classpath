@@ -3,5 +3,44 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jars"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/apache-mime4j-0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/bsh-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/commons-exec-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/commons-io-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/commons-jxpath-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/cssparser-0.9.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/guava-14.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/hamcrest-library-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/htmlunit-2.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/htmlunit-core-js-2.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/httpclient-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/httpcore-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/httpmime-4.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/ini4j-0.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/jcommander-1.29.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/jetty-websocket-8.1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/jna-3.4.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/jna-platform-3.4.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/json-20080701.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/junit-dep-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/nekohtml-1.9.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/netty-3.5.7.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/operadriver-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/phantomjsdriver-1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/protobuf-java-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/sac-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/selenium-java-2.35.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/selenium-java-2.35.0-srcs.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/serializer-2.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/testng-6.8.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/xalan-2.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/xercesImpl-2.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darin/Documents/GitHub/tempZero/jars/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="output" path="out/production/darinWorkTempZero"/>
 </classpath>
