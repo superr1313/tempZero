@@ -17,9 +17,14 @@ public class GradeElements extends CommonElements {
 	public GradeElements(WebDriver driver) 
 	{
 		super(driver);		
-	}	
+	}
 
-    public int emailStudent = 0;
+    public class studentRowInfo {
+        public Integer emailStudent;
+    }
+
+    public List <studentRowInfo> emailField = new ArrayList<studentRowInfo>();
+
 	/**
 	 * Identify elements on the page.
 	 */
@@ -48,7 +53,7 @@ public class GradeElements extends CommonElements {
 								WebElement popupClick = tableCell.findElement(By.cssSelector("a"));
 								gradeURLList.add(popupClick.getAttribute("href"));
 								numPerRow++;
-                                emailStudent = 1;
+                                emailField.get(0).emailStudent = 1;
 							}
 					}
 					columnNumber++;
@@ -238,7 +243,7 @@ public class GradeElements extends CommonElements {
                     gradeURLList.add(popupClick.getAttribute("href"));
                     numPerRow++;
                     System.out.println("the url found was: " + popupClick.getAttribute("href"));
-                    emailStudent = 1;
+                    emailField.get(0).emailStudent = 1;
                 }
             }
             columnNumber++;
@@ -249,6 +254,7 @@ public class GradeElements extends CommonElements {
     }
 
     public void enterTempZeroGradesForStudents(double percentStudentComplete, int studentRow) throws InterruptedException {
+        emailField.get(0).emailStudent = 0;
         for(String popupURL : getPopUpURLListForStudents(percentStudentComplete, studentRow)) {
             source.get(popupURL);
             waitForElementToShow(getTempZeroRadioButton());
@@ -257,10 +263,10 @@ public class GradeElements extends CommonElements {
             waitForElementToShow(getTempZeroSaveButton());
         }
 
-        if(emailStudent == 1) {
+        if(emailField.get(0).emailStudent == 1) {
             System.out.println("this student would have the email thing done:" + studentRow);
         }
-        emailStudent = 0;
+
     }
 
 
