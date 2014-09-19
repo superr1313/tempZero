@@ -18,7 +18,8 @@ public class GradeElements extends CommonElements {
 	{
 		super(driver);		
 	}	
-	
+
+    public int emailStudent = 0;
 	/**
 	 * Identify elements on the page.
 	 */
@@ -47,7 +48,8 @@ public class GradeElements extends CommonElements {
 								WebElement popupClick = tableCell.findElement(By.cssSelector("a"));
 								gradeURLList.add(popupClick.getAttribute("href"));
 								numPerRow++;
-							}	
+                                emailStudent = 1;
+							}
 					}
 					columnNumber++;
 				}
@@ -253,7 +255,13 @@ public class GradeElements extends CommonElements {
             clickTempZeroSaveButton();
             waitForElementToShow(getTempZeroSaveButton());
         }
+
+        if(emailStudent == 1) {
+            System.out.println("this student would have the email thing done:" + studentRow);
+        }
+        emailStudent = 0;
     }
+
 
 
 

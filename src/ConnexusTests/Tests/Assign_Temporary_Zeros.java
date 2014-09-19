@@ -17,5 +17,6 @@ public class Assign_Temporary_Zeros extends ConnexusMain {
 		page.clickSectionDropDown();
 		page.enterGradesForWholeClassFirst(gradeIconIndex);
 
+
 	}
 }
