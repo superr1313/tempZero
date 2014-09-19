@@ -18,6 +18,8 @@ public class Assign_Temporary_Zeros extends ConnexusMain {
         page.setupEmailField();
 		page.enterGradesForWholeClassFirst(gradeIconIndex);
 
+        //just testing to see what windows are open
+        page.printWindowHandles();
 
 	}
 }

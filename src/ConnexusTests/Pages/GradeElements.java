@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class GradeElements extends CommonElements {
 
@@ -290,6 +291,14 @@ public class GradeElements extends CommonElements {
 
         source.switchTo().window(winHandleBefore);
         emailField.get(0).emailStudent = 0;
+    }
+
+    public void printWindowHandles() {
+        Set <String> windowHandles = source.getWindowHandles();
+        System.out.println("There are " + windowHandles.size() + " window handles open.");
+        for(String windowHandle : windowHandles) {
+            System.out.println(windowHandle);
+        }
     }
 
 
