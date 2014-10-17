@@ -122,6 +122,8 @@ public class CommonElements extends PageObject {
         getUsernameTextbox().sendKeys(usernameInput);
         getPassTextbox().sendKeys(new String(getPass()));
         clickLogin();
+        Thread.sleep(3000);
+        source.get("https://www.connexus.com/home/pages/teacher.aspx");
         waitForElementToShow(getSectionDropDown());
     }
 
