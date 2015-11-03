@@ -13,6 +13,7 @@ public class Assign_Temporary_Zeros extends ConnexusMain {
 		
 	    int gradeIconIndex = 4;
 		GradeElements page = new GradeElements(getDriver());
+//        page.easyLogin();
 		page.login();
 		page.clickSectionDropDown();
         page.setupEmailField();

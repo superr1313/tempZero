@@ -137,6 +137,15 @@ public class CommonElements extends PageObject {
         waitForElementToShow(getSectionDropDown());
     }
 
+    public void easyLogin() throws InterruptedException  {  //use this function to ask for easy login
+        getUsernameTextbox().sendKeys("");
+        getPassTextbox().sendKeys("");
+        clickLogin();
+        Thread.sleep(3000);
+        source.get("https://www.connexus.com/home/pages/teacher.aspx");
+        waitForElementToShow(getSectionDropDown());
+    }
+
     public boolean ElementIsDisplayed(WebElement element) {
         return element.isDisplayed();
     }
