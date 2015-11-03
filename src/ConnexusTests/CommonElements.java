@@ -51,7 +51,7 @@ public class CommonElements extends PageObject {
 
     public WebElement getSectionDropDown() {
         try {
-            return source.findElement(By.id("mySections_ctl00_portalletHeaderLeft"));
+            return source.findElement(By.id("sectionsAndStudentsLinkIb"));
         }
         catch (NoSuchElementException ex) {
             return null;
@@ -77,27 +77,37 @@ public class CommonElements extends PageObject {
     }
 
     public WebElement getSectionTable() {
-        WebElement tableContainer = source.findElement(By.id("mySections"));
-        return tableContainer.findElement(By.cssSelector("table.datagridCondensed"));
+        WebElement tableContainer = source.findElement(By.id("sections-and-students"));
+        return tableContainer.findElement(By.cssSelector("table.cxTable"));
     }
 
     public List <WebElement> getSectionTableRows() {
-        return getSectionTable().findElements(By.cssSelector("tr.portalletEnhancedpurpleCell"));
+        return getSectionTable().findElements(By.cssSelector("td.section-name-column"));
     }
 
-    public void getClassList(int index) {
+    public void getClassList() {
         for(WebElement sectionCell : getSectionTableRows()) {
-                List<WebElement> columnsInRow = sectionCell.findElements(By.cssSelector("td"));
-                String className = columnsInRow.get(1).getText();   //1 = name column index
-                String classSchool = columnsInRow.get(2).getText();  //2 = school column index
-                String classURL = columnsInRow.get(5).findElements(By.cssSelector("a")).get(index).getAttribute("href");
-                
-                classInfo newClass = new classInfo();
-                newClass.className = className;
-                newClass.classSchool = classSchool;
-                newClass.classURL = classURL;
-                classList.add(newClass);
+            try {
+                List<WebElement> listItems = sectionCell.findElement(By.cssSelector("ul.contextMenu")).findElements(By.cssSelector("li"));
+
+                for(WebElement listItem : listItems) {
+                    WebElement listItemLink = listItem.findElement(By.cssSelector("a"));
+                    if(listItemLink.getAttribute("title").contains("View this section's Grade Book.")) {
+
+                        String className = sectionCell.findElements(By.cssSelector("a")).get(0).getText();
+                        String classSchool = sectionCell.findElements(By.cssSelector("a")).get(0).getText();
+                        String classURL = listItem.findElement(By.cssSelector("a")).getAttribute("href");
+
+                        classInfo newClass = new classInfo();
+                        newClass.className = className;
+                        newClass.classSchool = classSchool;
+                        newClass.classURL = classURL;
+                        classList.add(newClass);
+                    }
+                }
+            } catch (NoSuchElementException ex) {
             }
+        }
     }
     
     /**
@@ -133,15 +143,16 @@ public class CommonElements extends PageObject {
 
     public void clickSectionDropDown() throws InterruptedException {
         getSectionDropDown().click();
+        Thread.sleep(10000);
         //the function below looks for the loading spinner, if it is still present it waits 1 second and tries again.  will try for 30 seconds.
-        for(int i=0; i<30; i++) {
-            if(ElementIsDisplayed(getSectionLoadingSpinner())) {
-                Thread.sleep(1000);
-            }
-            else {
-                break;
-            }
-        }
+//        for(int i=0; i<30; i++) {
+//            if(ElementIsDisplayed(getSectionLoadingSpinner())) {
+//                Thread.sleep(1000);
+//            }
+//            else {
+//                break;
+//            }
+//        }
     }
 
     public List<Integer> displaySectionOptions() {

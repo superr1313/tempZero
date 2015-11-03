@@ -100,7 +100,7 @@ public class MailElements extends CommonElements {
     }
 
     public void sendEmailToEachSection(int index, int emailRecipients) throws InterruptedException {
-        getClassList(index);
+        getClassList();
         setClassEmails();
         for(int i = 0; i<classList.size(); i++) {
             if(classList.get(i).classEmailText != null) {

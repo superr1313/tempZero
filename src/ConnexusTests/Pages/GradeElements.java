@@ -216,7 +216,7 @@ public class GradeElements extends CommonElements {
     }
 
     public void enterGradesForWholeClassFirst(int index) throws InterruptedException {
-        getClassList(index);
+        getClassList();
         setClassPercentsWithStudentOption();
 
         for(int i = 0; i<classList.size(); i++) {
